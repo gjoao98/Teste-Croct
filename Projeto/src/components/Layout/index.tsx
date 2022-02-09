@@ -1,7 +1,10 @@
 import React, {FunctionComponent, ReactElement} from 'react';
-import logo from './logo.svg';
-import './style.css';
+
 import PersonaSelector from '../PersonaSelector';
+
+import logo from './logo.svg';
+
+import './style.css';
 
 const Layout: FunctionComponent = ({children}): ReactElement => (
     <div className="container">

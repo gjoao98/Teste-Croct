@@ -1,4 +1,4 @@
-import {ChangeEvent, FunctionComponent, ReactElement, useCallback} from 'react';
+import {ChangeEvent, FunctionComponent, ReactElement, useCallback, useState} from 'react';
 import {useCroct, useEvaluation} from '@croct/plug-react';
 
 import { useNavigate } from "react-router-dom";
@@ -12,7 +12,7 @@ type PersonaSelectorProps = {
 };
 
 const PersonaSelector: FunctionComponent<PersonaSelectorProps> = ({cacheKey}): ReactElement => {
-    let navigate = useNavigate();
+    const navigate = useNavigate();
     const croct = useCroct();
     const persona = useEvaluation<Persona|null>("user's persona or else 'default'", {
         cacheKey: cacheKey,
@@ -23,13 +23,12 @@ const PersonaSelector: FunctionComponent<PersonaSelectorProps> = ({cacheKey}): R
     const setPersona = useCallback(
         (event: ChangeEvent<HTMLSelectElement>) => {
             const patch = croct.user.edit();
-
+            
             if (event.target.value === 'default') {
-                navigate(`/`);
-                patch.unset('custom.persona');
+                patch.set('custom.persona', event.target.value);
             } else {
                 patch.set('custom.persona', event.target.value);
-                navigate(`${event.target.value}`);
+                navigate(`/`);
             }
 
             patch.save().then(() => window.setTimeout(() => window.location.reload(), 300));

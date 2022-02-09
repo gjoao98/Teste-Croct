@@ -44,3 +44,106 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+
+<Suspense fallback="✨ Personalizing...">
+  <Personalization expression="user's persona is 'developer'">
+    {(isDeveloper: boolean) =>
+      isDeveloper ? (
+        <a href="/share"> Compartilhe com seu desenvolvedor </a>
+      ) : (
+        <a href="/share"> Compartilhe com seu desenvolvedor </a>
+      )
+    }
+  </Personalization>
+</Suspense>
+
+<Suspense fallback="✨ Personalizing...">
+  <Personalization expression="user's persona is 'marketer'">
+    {(isMarketer: boolean) => (
+      <>{isMarketer && <button>Criar novo anuncio</button>}</>
+    )}
+  </Personalization>
+</Suspense>
+
+<Suspense fallback="✨ Personalizing content...">
+  <Slot id="home-banner">
+    {({ title, subtitle, cta }: HomeBanner) => (
+      <div>
+        <strong>{title}</strong>
+        <p>{subtitle}</p>
+        <a href={cta.link}>{cta.label}</a>
+      </div>
+    )}
+  </Slot>
+</Suspense>
+
+<Suspense fallback="✨ Personalizing...">
+  <Personalization expression="user's persona is 'growth-hacker'">
+    {(isGrowthHacker: boolean) =>
+      isGrowthHacker ? (
+        <Suspense fallback="✨ Personalizing content...">
+          <Slot id="home-banner">
+            {({ title, subtitle, cta }: HomeBanner) => (
+              <div>
+                <strong>{title}</strong>
+                <p>{subtitle}</p>
+                <a href={cta.link}>{cta.label}</a>
+              </div>
+            )}
+          </Slot>
+        </Suspense>
+      ) : (
+        <a href="/share"> Compartilhe com seu desenvolvedor </a>
+      )
+    }
+  </Personalization>
+</Suspense>
+
+<nav className="nav-bar">
+  <a href="https://croct.com" className="logo">
+    <img src={logo} title="Croct" alt="Croct" />
+  </a>
+</nav>
+
+<div className="content">
+  <h1>Qual sua função entre Developer, Marketer ou Growth Hacker?</h1>
+  <h2>Selecione uma delas para ter maiores informações.</h2>
+</div>
+
+<Suspense fallback="✨ Personalizing content...">
+  <Slot id="home-banner">
+    {({ title, subtitle, cta }: HomeBanner) => (
+      <div>
+        <strong>{title}</strong>
+        <p>{subtitle}</p>
+        <a href={cta.link}>{cta.label}</a>
+      </div>
+    )}
+  </Slot>
+</Suspense>
+
+<div>
+  <h1>
+    You can Hack many Web Sites programming features that let you manipulate
+    the sistems
+  </h1>
+
+  <span>Lorem ipsum dolor sit amet consectetur adipisicing elit.</span>
+
+  <img
+    className="hacker"
+    src={hackerImg}
+    alt="Imagem de um hacker com capuz"
+  />
+
+  <p>
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius aut ipsa
+    eligendi. Asperiores, autem quia vitae commodi ipsam sint necessitatibus
+    molestiae aperiam doloribus error assumenda eligendi, incidunt tempore
+    quaerat minima?
+  </p>
+
+  <Link to="/">
+    <button className="backHome">Voltar para Home</button>
+  </Link>
+</div>
