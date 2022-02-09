@@ -28,42 +28,38 @@ export function Home() {
 
       <div>
         <Suspense fallback="✨ Personalizing...">
-          <Personalization
-            expression={developer}
-            fallback={true}
-            initial={false}
-          >
-            {(isDeveloper: boolean) => <>{isDeveloper && <Developer />}</>}
+          <Personalization expression={developer} fallback={true} initial={false}>
+            {
+              (isDeveloper: boolean) => 
+              <>{isDeveloper && <Developer />}</>
+            }
           </Personalization>
         </Suspense>
 
         <Suspense fallback="✨ Personalizing...">
-          <Personalization
-            expression={marketer}
-            fallback={true}
-            initial={false}
-          >
-            {(isMarketer: boolean) => <>{isMarketer && <Marketer />}</>}
+          <Personalization expression={marketer} fallback={true} initial={false}>
+            {
+              (isMarketer: boolean) => 
+              <>{isMarketer && <Marketer />}</>
+            }
           </Personalization>
         </Suspense>
 
         <Suspense fallback="✨ Personalizing...">
-          <Personalization
-            expression={growthHacker}
-            fallback={true}
-            initial={false}
-          >
-            {(isGrowthHacker: boolean) => (
+          <Personalization expression={growthHacker}>
+            {
+              (isGrowthHacker: boolean) => 
               <>{isGrowthHacker && <GrowthHacker />}</>
-            )}
+            }
           </Personalization>
         </Suspense>
 
         <Suspense fallback="✨ Personalizing...">
           <Personalization expression={fallbackHome}>
-            {(isDefault: boolean) => (
-              <>{true && <Default />}</>
-            )}
+            {(isDefault: boolean) => isDefault
+              ? <Default />
+              :<>{false && <Default/>}</>
+            }
           </Personalization>
         </Suspense>
       </div>
